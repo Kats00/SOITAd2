@@ -1,14 +1,25 @@
 const express = require('express')
-
 const app = express()
+const path = require('path');
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(express.static(path.join(__dirname,'public')));
+
+app.use(bodyParser.json())
+app.use(
+  bodyParser.urlencoded({
+    extended: true
+  })
+);
+
+app.use('/', require('../routes/userRoutes'))
 
 app.get('/', (req, res) => {
     res.send('Express JS on Vercel')
 })
 
-app.get('/ping', (req, res) => {
-    res.send('pong 🏓')
-})
+app.use('/', require('../routes/userRoutes'))
 
 const port = process.env.PORT || 8080
 
