@@ -19,8 +19,6 @@ app.get('/', (req, res) => {
     res.send('Express JS on Vercel')
 })
 
-app.use('/', require('../routes/userRoutes'))
-
 const port = process.env.PORT || 8080
 
 app.listen(port, (err, res) => {
