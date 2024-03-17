@@ -14,7 +14,7 @@ app.use(
   })
 );
 
-app.use('/', require('./routes/userRoutes'))
+app.use('/', require('./routes/routes'))
 
 app.get('/', (req, res) => {
     res.send('Express JS on Vercel')

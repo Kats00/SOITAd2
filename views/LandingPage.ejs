@@ -4,32 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>landing page</title>
-    <link rel="stylesheet" href="public/styles/landingPage.scss">
+    <link rel="stylesheet" href="/styles/css/landingPage.css">
 </head>
 <body>
-    <div class="container">
-      <div id='loader'>
-        <div id='title' class='flex'>
-          <p class='loading-text'>LOADING</p>
-          <div class='therefore'>∴</div>
-          <p class="loading-number">%</p>
-        </div>
-        <div id='loading-bar-border'>
-          <div class='loading-bar'>
-          </div>
-        </div>
-        <div id='warning'>
-          <p>
-            <div class='exclamation'>!</div>
-            &nbsp CAUTION, Do not turn off.
-          </p>
-        <div id='line-cascates'></div>
+
+  <div class="container" id="particles-js"></div>
+
+  <div class="container" id="fake-loader">
+    <div id='loader'>
+      <div id='title' class='flex'>
+        <p class='loading-text'>LOADING</p>
+        <div class='therefore'>∴</div>
+        <p class="loading-number">%</p>
+      </div>
+      <div id='loading-bar-border'>
+        <div class='loading-bar'>
         </div>
       </div>
+      <div id='warning'>
+        <p>
+          <div class='exclamation'>!</div>
+          &nbsp CAUTION, Do not turn off.
+        </p>
+      <div id='line-cascates'></div>
+      </div>
     </div>
+  </div>
 
+  <div class="container loader-content" id="loader-content">
+    <div class="glitch" data-text="MAPUA">SOITSC</div> 
+  </div>
 
+  <div class="container" id="video">
+    show video here
+  </div>
 
-    <script src="/js/landingpage.js"></script>
+  <div class="container main-content" id="main-content">
+    <div class="form-cont">
+      <h2>
+        Enter Password
+      </h2>
+      <form action="">
+        <input type="password" name="password" id="password" required>
+        <input type="submit" value="Submit" onclick="verify()">
+      </form>
+    </div>
+  </div-->
+
+  <script src="/js/landingpage.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </body>
 </html>
