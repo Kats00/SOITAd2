@@ -32,8 +32,6 @@ function particles() {
 }
 
 function load() {
-    var loadingCompleted = false;
-
     Array.from(loadingContents).forEach(function(loadingContent) {
         console.log("found loader");
     
@@ -52,12 +50,6 @@ function load() {
         loadingContent.addEventListener('animationend', animationEndHandler);
     });    
 
-    videoIframe.onload = function() {
-        console.log("Iframe content loaded");
-        if (loadingCompleted) {
-            showMainContents();
-        }
-    };
 }
 
 function showMainContents() {
@@ -108,10 +100,7 @@ function showVideo() {
 }
 
 function addYouTubeVideo(containerId, videoId) {
-    // Create iframe element
     var iframe = document.createElement("iframe");
-
-    // Set iframe attributes
     iframe.width = "560";
     iframe.height = "315";
     iframe.src = "https://www.youtube.com/embed/" + videoId + "?si=Z3Z94FuVZuJyS03P";
@@ -119,11 +108,8 @@ function addYouTubeVideo(containerId, videoId) {
     iframe.frameBorder = "0";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
-
-    // Get container element
     var container = document.getElementById(containerId);
 
-    // Append iframe to container
     videoContainer.appendChild(iframe);
 }
 
