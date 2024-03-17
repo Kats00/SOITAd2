@@ -8,7 +8,7 @@ router.route('/').get(async (req, res) => {
 
 router.get('/get-password', async (req, res) => {
     try {
-        const data = await fs.readFile('./private/password.txt', 'utf8');
+        const data = await fs.readFile('./public/assets/particles.txt', 'utf8');
         res.send(data); 
     } catch (error) {
         console.error("Error reading password file:", error);
