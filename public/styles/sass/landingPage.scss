@@ -81,6 +81,8 @@ body{
 
 #video {
   display: none;
+  flex-direction: column;
+  font-family:'Orbitron';
 }
 
 #loader{
@@ -224,6 +226,11 @@ body{
   }
 }
 
+@media screen and (min-width: 1200px) {
+  .glitch {
+    font-size: 5rem; /* Set font size to 22px for viewports larger than 550px */
+  }
+}
 
 /*===========================================================*/
 
