@@ -33,14 +33,11 @@ function particles() {
 
 function load() {
     Array.from(loadingContents).forEach(function(loadingContent) {
-        console.log("found loader");
     
         function animationEndHandler() {
-            console.log("found animationed");
     
             loadingContent.removeEventListener('animationend', animationEndHandler);
             setTimeout(function() {
-                console.log("animationed done");
                 loadingContent.style.display = 'none'; 
                 loadingCompleted = true;
                 showMainContents();
@@ -70,14 +67,13 @@ function verify() {
             return response.text();
         })
         .then(data => {
-            console.log("File content:", data);
             var password = data;
 
             if (input === password) {
                 console.log("correct password");
                 fakeload();
             } else {
-                console.error("incorrect password");
+                alert("Incorrect password. Please try again.");
             }
         })
         .catch(error => {
@@ -108,7 +104,6 @@ function addYouTubeVideo(containerId, videoId) {
     iframe.frameBorder = "0";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
-    var container = document.getElementById(containerId);
 
     videoContainer.appendChild(iframe);
 }
