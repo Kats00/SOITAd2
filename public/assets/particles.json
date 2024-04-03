@@ -48,7 +48,7 @@
     "line_linked": {
       "enable": true,
       "distance": 150,
-      "color": "#ffffff",
+      "color": "#00FDFE",
       "opacity": 0.4,
       "width": 1
     },
@@ -71,7 +71,7 @@
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "bubble"
+        "mode": "grab, bubble"
       },
       "onclick": {
         "enable": true,
@@ -81,7 +81,7 @@
     },
     "modes": {
       "grab": {
-        "distance": 400,
+        "distance": 100,
         "line_linked": {
           "opacity": 1
         }
@@ -94,7 +94,7 @@
         "speed": 8
       },
       "repulse": {
-        "distance": 50
+        "distance": 20
       },
       "push": {
         "particles_nb": 4
@@ -107,7 +107,7 @@
   "retina_detect": true,
   "config_demo": {
     "hide_card": false,
-    "background_color": "#b61924",
+    "background_color": "transparent",
     "background_image": "",
     "background_position": "50% 50%",
     "background_repeat": "no-repeat",

@@ -9,11 +9,13 @@
 
 $dark-grey: #1a1a1a;
 $black: #000000;
+$trans-dark-grey: rgba(0, 0, 0, 0.85);
 $white: #ffffff;
 $offwhite: #f1f1f1;
 $grey1: rgba(255,255,255,.5);
 $grey2: #b5b5b5;
-
+$neon-blue: #00FDFE;
+$neon-pink: #FF5FBB;
 
 @keyframes initText{
   0% {content:"Initializing system . . ." }
@@ -61,16 +63,32 @@ body{
   background-color: $black;
   color: $offwhite;
   overflow:hidden;
-  height:100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+audio {
+   display: block;
+}
+
+.colors-bg {
+  display: flex;
+  position: absolute;
+  z-index: -1;
+  opacity: 0.08;
+  height: 100vh;
+  width: 100vw;
+  background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+  background-image: repeating-linear-gradient(315deg, #00FFFF2E 92%, #073AFF00 100%),repeating-radial-gradient(75% 75% at 238% 218%, #00FFFF12 30%, #073AFF14 39%),radial-gradient(99% 99% at 109% 2%, #00C9FFFF 0%, #073AFF00 100%),radial-gradient(99% 99% at 21% 78%, $neon-blue 0%, #073AFF00 100%),radial-gradient(160% 154% at 711px -303px, #2000FFFF 0%, #073AFFFF 100%);
 }
 
 .container{
-  display:flex;
-  min-height:100vh;
+  display:contents;
   flex:1;
-  align-items:center;
-  justify-content:center;
-  overflow: hidden;
+  width: fit-content;
+  overflow: visible;
   position: relative;
   z-index: 99;
 }
@@ -83,12 +101,17 @@ body{
   display: none;
   flex-direction: column;
   font-family:'Orbitron';
+  iframe, h5 {
+    z-index: 99;
+  }
 }
+
 
 #loader{
   display:flex;
   flex-direction:column;
   width:80%;
+  z-index: 99;
   animation: opcty 1s  ease-in-out;
     
   .loading-text{
@@ -106,7 +129,7 @@ body{
     counter-reset: num var(--num);
     margin-left:auto;
     transition: --num 5s;
-    animation: counting 3s  ease-in-out;
+    animation: counting 5s  ease-in-out;
     font-family:'Orbitron';
     animation-fill-mode: forwards;
     
@@ -131,7 +154,7 @@ body{
     height:.6rem;
     margin:1px 0px;
     background:$white;
-    animation:charging 3s  ease-in-out;
+    animation:charging 5s  ease-in-out;
     animation-fill-mode: forwards;
     
   }
@@ -166,7 +189,7 @@ body{
     text-align:end;
     color:$grey2;
     content:"";
-    animation: initText 3s ease;
+    animation: initText 5s ease;
     animation-fill-mode: forwards;
   }
 }
@@ -177,7 +200,7 @@ body{
   color: white;
   font-size: 8vw;
   position: relative;
-  width: 400px;
+  width: 300px;
   margin: 0 auto;
   font-family: 'Orbitron';
   text-align: center;
@@ -238,9 +261,23 @@ body{
   animation: myfadeout 0.2s ease-in-out;
 }
 
-#main-content { 
+#main-content, #error { 
   display: none;
   animation: myfadein 1.3s ease-in-out;
+
+  h2 {
+    animation: text-flicker 3s infinite;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  #congratulations{
+    font-size: 1.5rem;
+  }
+}
+
+#entered {
+  max-width: 500px !important;
 }
 
 @keyframes myfadeout {
@@ -260,6 +297,52 @@ body{
     opacity: 1;
   }
 }
+
+@keyframes text-flicker {
+  0% {
+    opacity: 0.1;
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.1;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
 
 /*========================================================*/
 @mixin backlight($x, $y, $spread, $size, $colorA, $colorB, $duration) {
@@ -292,18 +375,19 @@ body{
 
 .form-cont {
   position: relative;
-  max-width: 250px;
+  max-width: 300px;
   height: fit-content;
   width: 80%;
   padding: 2rem;
   font-family:'Orbitron';
   text-align: center;
   color: $offwhite;
-  background-color: $black;
-  border: solid 1px $dark-grey;
+  background-color: $trans-dark-grey;
+  border: solid 1px $neon-blue;
   border-radius: 10px;
   animation: textColor 10s ease infinite;
-  @include backlight(0, 0, 1vw, 1, $white, $dark-grey, 10s);
+  flex-wrap: wrap;
+  @include backlight(0, 0, 2vw, 1, $neon-blue, $neon-blue, 10s);
     
   @keyframes textColor {
     0% {
@@ -334,11 +418,51 @@ body{
     
     input[type=submit]{
       width: fit-content;
+      animation: border-flicker 5s ease infinite;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background-color: $neon-blue;
+        color: $black;
+        border-color: $black;
+        cursor: pointer;
+        animation: none;
+      }
     }
     
   }
-
 }
+
+.faulty-flicker {
+  animation: text-flicker 1s ease infinite;
+}
+
+.normal-flicker {
+  animation: text-flicker 3s ease infinite;
+}
+
+@keyframes border-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.1;
+  }
+
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 
 /*===========================================================*/
 #particles-js{
@@ -353,3 +477,4 @@ body{
 canvas {
   overflow: hidden;
 }
+

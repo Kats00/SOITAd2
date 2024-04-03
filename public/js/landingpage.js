@@ -3,11 +3,32 @@ var mainContents = document.getElementsByClassName("main-content");
 var fakeloader = document.getElementById("fake-loader");
 var videoContainer = document.getElementById("video");
 var videoIframe = videoContainer.querySelector("iframe");
+var errorDiv = document.getElementById("error");
 
 window.addEventListener('load', function() {
     particles();
     load();
 });
+
+window.onload = function() {
+    var audio = document.getElementById("bgAudio");
+    audio.muted = true;
+    document.addEventListener('click', function() {
+        audio.volume = 0.2;
+        audio.muted = false;
+
+        audio.play()
+            .then(() => {
+                console.log("Audio playback started successfully.");
+            })
+            .catch(error => {
+                console.error("Error starting audio playback:", error);
+            });
+        document.removeEventListener('click', arguments.callee);
+    });
+};
+
+
 
 function particles() {
     var particlesjson;
@@ -51,7 +72,7 @@ function load() {
 
 function showMainContents() {
     Array.from(mainContents).forEach(mainContent => {
-        mainContent.style.display = 'flex'; 
+        mainContent.style.display = 'contents'; 
     });
 }
 
@@ -73,7 +94,7 @@ function verify() {
                 console.log("correct password");
                 fakeload();
             } else {
-                alert("Incorrect password. Please try again.");
+                showError();
             }
         })
         .catch(error => {
@@ -82,29 +103,74 @@ function verify() {
 }
 
 function fakeload() {
-    fakeloader.style.display = "flex";
+    Array.from(mainContents).forEach(mainContent => {
+        mainContent.style.display = 'none'; 
+    });
+    fakeloader.style.display = "contents";
 
     setTimeout(function() {
         fakeloader.style.display = "none";
         showVideo();
-    }, 3500);
+    }, 5000);
 }
 
 function showVideo() {
-    videoContainer.style.display = "flex";
-    addYouTubeVideo("video-container", "sNmDwVEWNDg");
+    videoContainer.style.display = "contents";
+    //addVideo();
 }
 
-function addYouTubeVideo(containerId, videoId) {
+function showError() {
+    Array.from(mainContents).forEach(mainContent => {
+        mainContent.style.display = 'none'; 
+    });
+    errorDiv.style.display = "contents";
+
+    setTimeout(function() {
+        errorDiv.style.display = "none";
+        showMainContents();
+    }, 3000);
+}
+
+function addVideo() {
     var iframe = document.createElement("iframe");
     iframe.width = "560";
     iframe.height = "315";
-    iframe.src = "https://www.youtube.com/embed/" + videoId + "?si=Z3Z94FuVZuJyS03P";
-    iframe.title = "YouTube video player";
+    iframe.src = "assets/video.mp4";
+    iframe.title = "Video player";
     iframe.frameBorder = "0";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
 
     videoContainer.appendChild(iframe);
+
+    var audio = document.getElementById("bgAudio");
+    audio.volume = 0.2;
+
+    var targetVolume = 0;
+    var interval = 100;
+    var step = 0.05;
+
+    var fadeInterval = setInterval(function() {
+        if (audio.volume > targetVolume) {
+            audio.volume = Math.max(audio.volume - step, targetVolume);
+        } else {
+            clearInterval(fadeInterval);
+        }
+    }, interval);
+
+    iframe.addEventListener('load', function() {
+        var video = iframe.contentWindow.document.querySelector('video');
+        video.addEventListener('ended', function() {
+            targetVolume = 0.2;
+            var fadeInterval = setInterval(function() {
+                if (audio.volume < targetVolume) {
+                    audio.volume = Math.min(audio.volume + step, targetVolume);
+                } else {
+                    clearInterval(fadeInterval);
+                }
+            }, interval);
+        });
+    });
 }
+
 

@@ -1,7 +1,9 @@
 const express = require('express')
-const app = express()
 const path = require('path');
 const bodyParser = require("body-parser");
+const cors = require('cors');
+const app = express();
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -14,7 +16,13 @@ app.use(
   })
 );
 
+app.use(cors());
+
 app.use('/', require('./routes/routes'))
+app.use('/assets', express.static(path.join(__dirname, 'music'), {
+  extensions: ['mp3']
+}));
+
 
 app.get('/', (req, res) => {
     res.send('Express JS on Vercel')

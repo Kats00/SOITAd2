@@ -8,6 +8,11 @@
 </head>
 <body>
 
+  <audio id="bgAudio" autoplay loop>
+    <source src="/assets/bg.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="colors-bg"></div>
   <div id="particles-js"></div>
 
   <div class="container" id="fake-loader">
@@ -32,24 +37,32 @@
   </div>
 
   <div class="container loader-content" id="loader-content">
-    <div class="glitch" data-text="MAPUA">SOITSC</div> 
+    <div class="glitch" data-text="NIGHT">SOIT</div> 
   </div>
 
   <div class="container" id="video">
-    <h5>> showing encrypted file...</h5><br>
+    <div class="form-cont" id="entered">
+      <h1 class="normal-flicker" id="congratulations">Congratulations, player.</h1> <h3><br> Y<span class="faulty-flicker">o</span>u've entered the system. <br><br> Claim your reward.</h3>
+    </div>
+  </div>
+
+  <div class="error" id="error">
+    <div class="form-cont">
+      <h1 class="normal-flicker">Ac<span class="faulty-flicker">c</span>ess Deni<span class="faulty-flicker">e</span>d</h1>
+    </div>
   </div>
 
   <div class="container main-content" id="main-content">
     <div class="form-cont">
       <h2>
-        Enter Password
+        Enter Password, Player
       </h2>
       <form action="">
         <input type="password" name="password" id="password" required>
         <input type="submit" value="Submit" onclick="verify()">
       </form>
     </div>
-  </div-->
+  </div>
 
   <script src="/js/landingpage.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
