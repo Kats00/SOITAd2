@@ -168,7 +168,7 @@ function addVideo() {
     iframe.src = "https://www.youtube.com/embed/j1eI-7XWjho?si=pHRs8ilGUL2XeqwD";
     iframe.title = "Video player";
     iframe.frameBorder = "0";
-    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop";
     iframe.allowFullscreen = true;
 
     var videoContainer = document.getElementById("videoContainer");
