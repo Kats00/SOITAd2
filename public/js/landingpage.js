@@ -119,6 +119,7 @@ function showError() {
     }, 3000);
 }
 
+/*
 function addVideo() {
     var iframe = document.createElement("iframe");
     iframe.width = "560";
@@ -159,13 +160,13 @@ function addVideo() {
             }, interval);
         });
     });
-}
+}*/
 
 function addVideo() {
     var iframe = document.createElement("iframe");
     iframe.width = "0";
     iframe.height = "0";
-    iframe.src = "https://www.youtube.com/embed/j1eI-7XWjho?si=pHRs8ilGUL2XeqwD";
+    iframe.src = "https://www.youtube.com/embed/MqlbVmKOkNM?si=Lu60H48THKXtMoVu";
     iframe.title = "Video player";
     iframe.frameBorder = "0";
     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; loop";
